@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Domain.Character;
+using Core.Domain.Episode;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.EntityFramework
 {
     public class AppDbContext:DbContext
     {
-
+        public virtual DbSet<Character> Characters { get; set; }
+        public virtual DbSet<Episode> Episodes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -16,6 +19,7 @@ namespace Infrastructure.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
 
         }
     }
