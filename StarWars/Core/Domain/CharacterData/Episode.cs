@@ -11,5 +11,6 @@ namespace Core.Domain.CharacterData
             Title = title;
         }
         public string Title { get; protected set; }
+
     }
 }

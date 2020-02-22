@@ -23,7 +23,12 @@ namespace Services.CharacterData.Handlers.Query
             return await _dbContext.Characters
                 .OrderBy(character => character.Name)
                 .Skip((query.PageNumber - 1)*query.PageSize)
-                .Take(query.PageSize).Select(character=>new CharacterDto())
+                .Take(query.PageSize)
+                .Select(character=>new CharacterDto(character.Id,character.Name,
+                    character.Characters
+                    .Select(friend=>friend.Name),
+                    character.Episodes
+                    .Select(episode=>episode.Title)))
                 .ToListAsync();
         }
     }

@@ -6,9 +6,9 @@ using Core.Domain.CharacterData;
 using Core.Domain.CharacterData.Repositories;
 using Infrastructure.EntityFramework;
 
-namespace Infrastructure.Repositories
+namespace Infrastructure.Repositories.CharacterData
 {
-    public class CharacterRepository:ICharacterRepository
+    public class CharacterRepository : ICharacterRepository
     {
         private readonly AppDbContext _dbContext;
         public CharacterRepository(AppDbContext dbContext)

@@ -11,12 +11,19 @@ namespace Core.Domain.CharacterData
 
         }
 
-        public Character(Guid id, string name) : base(id)
+        public Character(Guid id, string name,ICollection<Character>characters,ICollection<Episode>episodes) : base(id)
         {
             Name = name;
+            Characters = characters;
+            Episodes = episodes;
         }
         public string Name { get; protected set; }
         public virtual ICollection<Character> Characters { get; protected set; } = new List<Character>();
         public virtual ICollection<Episode> Episodes { get; protected set; } = new List<Episode>();
+        public void AddEpisode(Episode episode)
+        {
+            Episodes.Add(episode);
+        }
+
     }
 }

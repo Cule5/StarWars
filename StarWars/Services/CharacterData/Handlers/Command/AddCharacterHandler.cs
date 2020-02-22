@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Services.CharacterData.Command;
+using Services.CharacterData.Dto;
 using Services.Common.Command;
 
 namespace Services.CharacterData.Handlers.Command
@@ -14,9 +15,9 @@ namespace Services.CharacterData.Handlers.Command
         {
             _characterDataService = characterDataService;
         }
-        public Task HandleAsync(AddCharacter command)
+        public async Task HandleAsync(AddCharacter command)
         {
-            throw new NotImplementedException();
+            await _characterDataService.AddCharacterAsync(new CharacterDto(command.Id,command.Name,command.Friends,command.Episodes));
         }
     }
 }
