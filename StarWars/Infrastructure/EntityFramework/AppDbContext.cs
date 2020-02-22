@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Core.Domain.Character;
-using Core.Domain.Episode;
+using Core.Domain.CharacterData;
 using Core.Domain.Identity;
 using Microsoft.EntityFrameworkCore;
 

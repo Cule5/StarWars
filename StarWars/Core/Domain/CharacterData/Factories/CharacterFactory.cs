@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Domain.Character.Repositories;
+using Core.Domain.CharacterData.Repositories;
 
-namespace Services.Values
+namespace Core.Domain.CharacterData.Factories
 {
-    public class ValuesService:IValuesService
+    public class CharacterFactory : ICharacterFactory
     {
         private readonly ICharacterRepository _characterRepository;
-        public ValuesService(ICharacterRepository characterRepository)
+        public CharacterFactory(ICharacterRepository characterRepository)
         {
             _characterRepository = characterRepository;
         }
-        public Task AddCharacterAsync()
+        public Task<Character> CreateAsync(Guid id)
         {
             throw new NotImplementedException();
         }

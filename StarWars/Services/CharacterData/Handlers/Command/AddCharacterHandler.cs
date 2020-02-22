@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Services.CharacterData.Command;
 using Services.Common.Command;
-using Services.Values.Command;
 
-namespace Services.Values.Handlers.Command
+namespace Services.CharacterData.Handlers.Command
 {
     public class AddCharacterHandler:ICommandHandler<AddCharacter>
     {
-        private readonly IValuesService _valuesService;
-        public AddCharacterHandler(IValuesService valuesService)
+        private readonly ICharacterDataService _characterDataService;
+        public AddCharacterHandler(ICharacterDataService characterDataService)
         {
-            _valuesService = valuesService;
+            _characterDataService = characterDataService;
         }
         public Task HandleAsync(AddCharacter command)
         {

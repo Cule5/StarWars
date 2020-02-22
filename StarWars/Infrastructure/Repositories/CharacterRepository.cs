@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Domain.Character;
-using Core.Domain.Character.Repositories;
+using Core.Domain.CharacterData;
+using Core.Domain.CharacterData.Repositories;
 using Infrastructure.EntityFramework;
 
 namespace Infrastructure.Repositories

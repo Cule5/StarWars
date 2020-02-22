@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
-using Services.Values.Command;
-using Services.Values.Query;
+using Services.CharacterData.Command;
+using Services.CharacterData.Query;
 
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class CharacterDataController : Controller
     {
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IQueryDispatcher _queryDispatcher;
-        public ValuesController(ICommandDispatcher commandDispatcher,IQueryDispatcher queryDispatcher)
+        public CharacterDataController(ICommandDispatcher commandDispatcher,IQueryDispatcher queryDispatcher)
         {
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;

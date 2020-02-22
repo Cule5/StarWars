@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services.Values.Dto
+namespace Services.CharacterData.Dto
 {
     public class CharacterDto
     {

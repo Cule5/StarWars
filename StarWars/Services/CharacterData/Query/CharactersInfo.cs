@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using Services.CharacterData.Dto;
 using Services.Common.Query;
-using Services.Values.Dto;
 
-namespace Services.Values.Query
+namespace Services.CharacterData.Query
 {
     public class CharactersInfo:IQuery<IEnumerable<CharacterDto>>
     {

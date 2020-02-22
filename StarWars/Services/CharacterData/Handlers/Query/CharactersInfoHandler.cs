@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using Services.CharacterData.Dto;
+using Services.CharacterData.Query;
 using Services.Common.Query;
-using Services.Values.Dto;
-using Services.Values.Query;
 
-namespace Services.Values.Handlers.Query
+namespace Services.CharacterData.Handlers.Query
 {
     public class CharactersInfoHandler:IQueryHandler<CharactersInfo,IEnumerable<CharacterDto>>
     {

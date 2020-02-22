@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.EntityFramework;
+using Services.CharacterData.Dto;
+using Services.CharacterData.Query;
 using Services.Common.Query;
-using Services.Values.Dto;
-using Services.Values.Query;
 
-namespace Services.Values.Handlers.Query
+namespace Services.CharacterData.Handlers.Query
 {
     class SingleCharacterInfoHandler:IQueryHandler<SingleCharacterInfo,CharacterDto>
     {
