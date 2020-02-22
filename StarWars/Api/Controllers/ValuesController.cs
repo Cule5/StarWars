@@ -3,43 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Services.Dispatcher.Command;
+using Services.Dispatcher.Query;
+using Services.Values.Command;
+using Services.Values.Query;
 
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
+    public class ValuesController : Controller
     {
-        // GET api/values
+        private readonly ICommandDispatcher _commandDispatcher;
+        private readonly IQueryDispatcher _queryDispatcher;
+        public ValuesController(ICommandDispatcher commandDispatcher,IQueryDispatcher queryDispatcher)
+        {
+            _commandDispatcher = commandDispatcher;
+            _queryDispatcher = queryDispatcher;
+        }
+
+        
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [Route("single-character-info/{characterName}")]
+        public async Task<IActionResult> SingleCharacterInfo([FromRoute]string characterName)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await _queryDispatcher.DispatchAsync(new SingleCharacterInfo(characterName)));
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [HttpGet]
+        [Route("character-info")]
+        public async Task<IActionResult> Test([FromQuery]CharactersInfo query)
         {
-            return "value";
+            return Ok(await _queryDispatcher.DispatchAsync(query));
         }
 
-        // POST api/values
+        [HttpGet]
+        [Route("all-character-info")]
+        public async Task<IActionResult> AllCharacterInfo()
+        {
+            return Ok();
+        }
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("add-character")]
+        public async Task<IActionResult> AddCharacter([FromBody]AddCharacter command)
         {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            await _commandDispatcher.DispatchAsync(command);
+            return Ok();
         }
     }
 }

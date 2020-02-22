@@ -8,11 +8,13 @@ namespace Services.Identity.Command
 {
     public class SignUp:ICommand
     {
+        public Guid UserId { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
         [JsonConstructor]
-        public SignUp(string email,string password)
+        public SignUp(Guid userId,string email,string password)
         {
+            UserId = userId;
             Email = email;
             Password = password;
         }

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
+using Services.Identity.Command;
+using Services.Identity.Query;
 
 namespace Api.Controllers
 {
@@ -20,15 +22,16 @@ namespace Api.Controllers
         }
         [HttpPost]
         [Route("sign-in")]
-        public async Task<IActionResult> SignIn()
+        public async Task<IActionResult> SignIn([FromBody]SignIn query)
         {
-            return Ok();
+            return Ok(await _queryDispatcher.DispatchAsync(query));
         }
 
         [HttpPost]
         [Route("sign-up")]
-        public async Task<IActionResult> SignUp()
+        public async Task<IActionResult> SignUp([FromBody]SignUp command)
         {
+            await _commandDispatcher.DispatchAsync(command);
             return Ok();
         }
 

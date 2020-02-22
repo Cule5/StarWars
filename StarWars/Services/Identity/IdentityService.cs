@@ -2,19 +2,26 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Domain.Identity.Factories;
+using Core.Domain.Identity.Repositories;
+using Infrastructure.Authentication;
 
 namespace Services.Identity
 {
     public class IdentityService:IIdentityService
     {
-        public Task SignInAsync()
+        private readonly IUserRepository _userRepository;
+        private readonly IUserFactory _userFactory;
+        public IdentityService(IUserRepository userRepository,IUserFactory userFactory)
         {
-            throw new NotImplementedException();
+            _userRepository = userRepository;
+            _userFactory = userFactory;
         }
 
-        public Task SignUpAsync()
+        public async Task SignUpAsync(string email, string password)
         {
-            throw new NotImplementedException();
+            var newUser=await _userFactory.CreateAsync(email, password);
+            await _userRepository.AddAsync(newUser);
         }
     }
 }

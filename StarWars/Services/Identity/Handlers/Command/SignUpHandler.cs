@@ -14,9 +14,9 @@ namespace Services.Identity.Handlers.Command
         {
             _identityService = identityService;
         }
-        public Task HandleAsync(SignUp command)
+        public async Task HandleAsync(SignUp command)
         {
-            throw new NotImplementedException();
+            await _identityService.SignUpAsync(command.Email,command.Password);
         }
     }
 }

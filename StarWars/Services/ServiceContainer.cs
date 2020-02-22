@@ -11,13 +11,13 @@ namespace Services
         public static void Build(ContainerBuilder containerBuilder)
         {
             var servicesAssembly = Assembly.GetExecutingAssembly();
-           // var coreAssembly = Assembly.GetAssembly(typeof(Core.Domain.User.User));
+            var coreAssembly = Assembly.GetAssembly(typeof(Core.Domain.Identity.User));
             containerBuilder.RegisterAssemblyTypes(servicesAssembly)
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
-            //containerBuilder.RegisterAssemblyTypes(coreAssembly)
-            //    .AsImplementedInterfaces()
-            //    .InstancePerLifetimeScope();
+            containerBuilder.RegisterAssemblyTypes(coreAssembly)
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
         }
     }
 }

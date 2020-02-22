@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Core.Domain.Character;
 using Core.Domain.Episode;
+using Core.Domain.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.EntityFramework
@@ -11,6 +12,7 @@ namespace Infrastructure.EntityFramework
     {
         public virtual DbSet<Character> Characters { get; set; }
         public virtual DbSet<Episode> Episodes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
