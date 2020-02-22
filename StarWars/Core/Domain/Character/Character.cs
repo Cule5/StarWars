@@ -11,7 +11,7 @@ namespace Core.Domain.Character
 
         }
 
-        public Character(string name)
+        public Character(Guid id,string name):base(id)
         {
             Name = name;
         }

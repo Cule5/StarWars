@@ -22,9 +22,10 @@ namespace Services.Identity.Handlers.Query
 
         public async Task<JsonWebToken> HandleAsync(SignIn query)
         {
-            var dbUser=await _dbContext.Users.FirstOrDefaultAsync(user=>user.Email.Equals(query.Email)&&user.Password.Equals(query.Password));
+            var dbUser=await _dbContext.Users
+                .FirstOrDefaultAsync(user=>user.Email.Equals(query.Email)&&user.Password.Equals(query.Password));
             if(dbUser==null)
-                throw new Exception("");
+                throw new Exception("Invalid email or password");
             return _jwtProvider.CreateToken(dbUser.Id);
 
         }

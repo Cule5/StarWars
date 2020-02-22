@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 using System.Text;
 
 namespace Core.Domain.Identity
@@ -13,6 +14,7 @@ namespace Core.Domain.Identity
         {
             Email = email;
             Password = password;
+            
         }
     }
 }
