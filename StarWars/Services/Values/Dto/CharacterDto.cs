@@ -6,5 +6,9 @@ namespace Services.Values.Dto
 {
     public class CharacterDto
     {
+        public CharacterDto()
+        {
+
+        }
     }
 }
