@@ -8,16 +8,16 @@ using Services.Common.Command;
 
 namespace Services.CharacterData.Handlers.Command
 {
-    public class AddCharacterHandler:ICommandHandler<AddCharacter>
+    public class CreateCharacterCharacterHandler:ICommandHandler<CreateCharacter>
     {
         private readonly ICharacterDataService _characterDataService;
-        public AddCharacterHandler(ICharacterDataService characterDataService)
+        public CreateCharacterCharacterHandler(ICharacterDataService characterDataService)
         {
             _characterDataService = characterDataService;
         }
-        public async Task HandleAsync(AddCharacter command)
+        public async Task HandleAsync(CreateCharacter command)
         {
-            await _characterDataService.AddCharacterAsync(new ExtendedCharacterDto(command.Id,command.Name,command.Friends,command.Episodes));
+            await _characterDataService.CreateCharacterAsync(command.Id,command.Name);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.EntityFramework;
@@ -16,9 +17,15 @@ namespace Services.CharacterData.Handlers.Query
         {
             _dbContext = dbContext;
         }
-        public Task<ExtendedCharacterDto> HandleAsync(SingleCharacterInfo query)
+        public async Task<ExtendedCharacterDto> HandleAsync(SingleCharacterInfo query)
         {
-            throw new NotImplementedException();
+            var dbCharacter=await _dbContext.Characters
+                .FindAsync(query.Id);
+            if (dbCharacter == null)
+                throw new Exception("");
+            return new ExtendedCharacterDto(dbCharacter.Id,dbCharacter.Name,dbCharacter.Characters
+                .Select(character=>new SimpleCharacterDto(character.Id,character.Name)),dbCharacter.Episodes
+                .Select(episode=>new SimpleEpisodeDto(episode.Id,episode.Title)));
         }
     }
 }

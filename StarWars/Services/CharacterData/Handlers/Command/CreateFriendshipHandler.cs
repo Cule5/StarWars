@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Services.CharacterData.Command;
 using Services.Common.Command;
 
 namespace Services.CharacterData.Handlers.Command
 {
-    public class AddEpisodeHandler:ICommandHandler<AddEpisodeToCharacter>
+    public class CreateFriendshipHandler:ICommandHandler<CreateFriendship>
     {
         private readonly ICharacterDataService _characterDataService;
-        public AddEpisodeHandler(ICharacterDataService characterDataService)
+        public CreateFriendshipHandler(ICharacterDataService characterDataService)
         {
             _characterDataService = characterDataService;
         }
-        public Task HandleAsync(AddEpisodeToCharacter command)
+        public async Task HandleAsync(CreateFriendship command)
         {
             throw new NotImplementedException();
         }

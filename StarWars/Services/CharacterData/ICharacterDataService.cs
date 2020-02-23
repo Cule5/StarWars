@@ -8,7 +8,7 @@ namespace Services.CharacterData
 {
     public interface ICharacterDataService
     {
-        Task AddCharacterAsync(ExtendedCharacterDto extendedCharacterDto);
-        Task AddEpisodeAsync();
+        Task CreateCharacterAsync(Guid id,string name);
+        Task CreateEpisodeAsync(Guid id,string title);
     }
 }

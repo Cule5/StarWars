@@ -13,22 +13,27 @@ namespace Services.CharacterData
         private readonly ICharacterFactory _characterFactory;
         private readonly IEpisodeFactory _episodeFactory;
         private readonly ICharacterRepository _characterRepository;
-        public CharacterDataService(ICharacterFactory characterFactory,IEpisodeFactory episodeFactory,ICharacterRepository characterRepository)
+        private readonly IEpisodeRepository _episodeRepository;
+        public CharacterDataService(
+            ICharacterFactory characterFactory,
+            IEpisodeFactory episodeFactory,
+            ICharacterRepository characterRepository,
+            IEpisodeRepository episodeRepository)
         {
             _characterFactory = characterFactory;
             _episodeFactory = episodeFactory;
             _characterRepository = characterRepository;
+            _episodeRepository = episodeRepository;
         }
-        public async Task AddCharacterAsync(ExtendedCharacterDto extendedCharacterDto)
+        public async Task CreateCharacterAsync(Guid id,string name)
         {
-            
-
-            
+            var newCharacter=await _characterFactory.CreateAsync(id, name);
+            await _characterRepository.AddAsync(newCharacter);
         }
-
-        public Task AddEpisodeAsync()
+        public async Task CreateEpisodeAsync(Guid id, string title)
         {
-            throw new NotImplementedException();
+            var newEpisode = await _episodeFactory.CreateAsync(id,title);
+            await _episodeRepository.AddAsync(newEpisode);
         }
     }
 }
