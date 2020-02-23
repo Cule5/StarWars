@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Services.CharacterData.Dto
 {
-    public class CharacterDto
+    public class ExtendedCharacterDto
     {
-        public CharacterDto(Guid id,string name,IEnumerable<string>friends,IEnumerable<string>episodes)
+        public ExtendedCharacterDto(Guid id,string name,IEnumerable<SimpleCharacterDto>friends,IEnumerable<SimpleEpisodeDto>episodes)
         {
             Id = id;
             Name = name;
@@ -15,7 +15,7 @@ namespace Services.CharacterData.Dto
         }
         public Guid Id { get; private set; }
         public string Name { get; private set; }
-        public IEnumerable<string> Friends { get; private set; }
-        public IEnumerable<string> Episodes { get; private set; }
+        public IEnumerable<SimpleCharacterDto> Friends { get; private set; }
+        public IEnumerable<SimpleEpisodeDto> Episodes { get; private set; }
     }
 }

@@ -11,24 +11,24 @@ using Services.Common.Query;
 
 namespace Services.CharacterData.Handlers.Query
 {
-    public class CharactersInfoHandler:IQueryHandler<CharactersInfo,IEnumerable<CharacterDto>>
+    public class AllCharactersInfoHandler:IQueryHandler<AllCharactersInfo,IEnumerable<ExtendedCharacterDto>>
     {
         private readonly AppDbContext _dbContext;
-        public CharactersInfoHandler(AppDbContext dbContext)
+        public AllCharactersInfoHandler(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public async Task<IEnumerable<CharacterDto>> HandleAsync(CharactersInfo query)
+        public async Task<IEnumerable<ExtendedCharacterDto>> HandleAsync(AllCharactersInfo query)
         {
             return await _dbContext.Characters
                 .OrderBy(character => character.Name)
                 .Skip((query.PageNumber - 1)*query.PageSize)
                 .Take(query.PageSize)
-                .Select(character=>new CharacterDto(character.Id,character.Name,
+                .Select(character=>new ExtendedCharacterDto(character.Id,character.Name,
                     character.Characters
-                    .Select(friend=>friend.Name),
+                    .Select(friend=>new SimpleCharacterDto(friend.Id,friend.Name)),
                     character.Episodes
-                    .Select(episode=>episode.Title)))
+                    .Select(episode=>new SimpleEpisodeDto(episode.Id,episode.Title))))
                 .ToListAsync();
         }
     }

@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Services.CharacterData.Command;
-using Services.CharacterData.Dto;
 using Services.Common.Command;
 
 namespace Services.CharacterData.Handlers.Command
 {
-    public class AddCharacterHandler:ICommandHandler<AddCharacter>
+    public class AddEpisodeHandler:ICommandHandler<AddEpisode>
     {
         private readonly ICharacterDataService _characterDataService;
-        public AddCharacterHandler(ICharacterDataService characterDataService)
+        public AddEpisodeHandler(ICharacterDataService characterDataService)
         {
             _characterDataService = characterDataService;
         }
-        public async Task HandleAsync(AddCharacter command)
+        public Task HandleAsync(AddEpisode command)
         {
-            await _characterDataService.AddCharacterAsync(new ExtendedCharacterDto(command.Id,command.Name,command.Friends,command.Episodes));
+            throw new NotImplementedException();
         }
     }
 }

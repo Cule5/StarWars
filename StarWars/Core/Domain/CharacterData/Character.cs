@@ -20,10 +20,7 @@ namespace Core.Domain.CharacterData
         public string Name { get; protected set; }
         public virtual ICollection<Character> Characters { get; protected set; } = new List<Character>();
         public virtual ICollection<Episode> Episodes { get; protected set; } = new List<Episode>();
-        public void AddEpisode(Episode episode)
-        {
-            Episodes.Add(episode);
-        }
+        
 
     }
 }

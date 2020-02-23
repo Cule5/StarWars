@@ -9,14 +9,14 @@ using Services.Common.Query;
 
 namespace Services.CharacterData.Handlers.Query
 {
-    class SingleCharacterInfoHandler:IQueryHandler<SingleCharacterInfo,CharacterDto>
+    class SingleCharacterInfoHandler:IQueryHandler<SingleCharacterInfo,ExtendedCharacterDto>
     {
         private readonly AppDbContext _dbContext;
         public SingleCharacterInfoHandler(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public Task<CharacterDto> HandleAsync(SingleCharacterInfo query)
+        public Task<ExtendedCharacterDto> HandleAsync(SingleCharacterInfo query)
         {
             throw new NotImplementedException();
         }

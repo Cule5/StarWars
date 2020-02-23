@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Domain.CharacterData.Repositories;
@@ -13,9 +14,13 @@ namespace Core.Domain.CharacterData.Factories
         {
             _characterRepository = characterRepository;
         }
-        public Task<Character> CreateAsync(Guid id)
+        public async Task<Character> CreateAsync(Guid id, string name, IEnumerable<Character> friends, IEnumerable<Episode> episodes)
         {
-            throw new NotImplementedException();
+            var dbCharacter=await _characterRepository.GetByNameAsync(name);
+            if(dbCharacter!=null)
+                throw new DomainException("Character with given name already exists");
+
+            return new Character(id,name,friends.ToList(),episodes.ToList());
         }
     }
 }

@@ -23,29 +23,29 @@ namespace Api.Controllers
 
         
         [HttpGet]
-        [Route("single-character-info/{characterName}")]
-        public async Task<IActionResult> SingleCharacterInfo([FromRoute]string characterName)
+        [Route("single-character-info/{id}")]
+        public async Task<IActionResult> SingleCharacterInfo([FromRoute]Guid id)
         {
-            return Ok(await _queryDispatcher.DispatchAsync(new SingleCharacterInfo(characterName)));
-        }
-
-        [HttpGet]
-        [Route("character-info")]
-        public async Task<IActionResult> Test([FromQuery]CharactersInfo query)
-        {
-            return Ok(await _queryDispatcher.DispatchAsync(query));
+            return Ok(await _queryDispatcher.DispatchAsync(new SingleCharacterInfo(id)));
         }
 
         [HttpGet]
         [Route("all-character-info")]
-        public async Task<IActionResult> AllCharacterInfo()
+        public async Task<IActionResult> Test([FromQuery]AllCharactersInfo query)
         {
-            return Ok();
+            return Ok(await _queryDispatcher.DispatchAsync(query));
         }
 
         [HttpPost]
         [Route("add-character")]
         public async Task<IActionResult> AddCharacter([FromBody]AddCharacter command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+            return Ok();
+        }
+        [HttpPut]
+        [Route("add-episode")]
+        public async Task<IActionResult> AddEpisode([FromBody]AddEpisode command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();

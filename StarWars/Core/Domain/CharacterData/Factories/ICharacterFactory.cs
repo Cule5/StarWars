@@ -7,6 +7,6 @@ namespace Core.Domain.CharacterData.Factories
 {
     public interface ICharacterFactory
     {
-        Task<Character> CreateAsync(Guid id);
+        Task<Character> CreateAsync(Guid id,string name,IEnumerable<Character>friends,IEnumerable<Episode>episodes);
     }
 }

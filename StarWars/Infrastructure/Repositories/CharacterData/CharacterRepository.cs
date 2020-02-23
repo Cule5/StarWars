@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Core.Domain.CharacterData;
 using Core.Domain.CharacterData.Repositories;
 using Infrastructure.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories.CharacterData
 {
@@ -20,6 +21,11 @@ namespace Infrastructure.Repositories.CharacterData
         public async Task<Character> GetAsync(Guid id)
         {
             return await _dbContext.Characters.FindAsync(id);
+        }
+
+        public async Task<Character> GetByNameAsync(string name)
+        {
+            return await _dbContext.Characters.FirstOrDefaultAsync(character=>character.Name.Equals(name));
         }
 
         public async Task AddAsync(Character character)

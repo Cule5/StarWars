@@ -7,12 +7,12 @@ using Services.Common.Query;
 
 namespace Services.CharacterData.Query
 {
-    public class SingleCharacterInfo:IQuery<CharacterDto>
+    public class SingleCharacterInfo:IQuery<ExtendedCharacterDto>
     {
-        public string CharacterName { get; private set; }
-        public SingleCharacterInfo(string characterName)
+        public SingleCharacterInfo(Guid id)
         {
-            CharacterName = characterName;
+            Id = id;
         }
+        public Guid Id { get; private set; }
     }
 }
