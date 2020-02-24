@@ -71,18 +71,16 @@ namespace Services.CharacterData
             foreach (var episodeId in episodes)
             {
                 var dbEpisode=await _episodeRepository.GetAsync(episodeId);
-                //if (dbEpisode != null&&!dbCharacter.)
-                //{
-                    
-                //}
+                if (dbEpisode != null)
+                    dbEpisode.AddCharacter(dbCharacter);
             }
 
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteFriendship(Guid characterA,Guid characterB)
+        public async Task DeleteFriendship(Guid characterA,Guid characterB)
         {
-            throw new NotImplementedException();
+            await _friendshipRepository.DeleteAsync(characterA, characterB);
         }
     }
 }

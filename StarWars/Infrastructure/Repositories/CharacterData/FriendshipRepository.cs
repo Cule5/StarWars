@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Core.Domain.CharacterData;
 using Core.Domain.CharacterData.Repositories;
 using Infrastructure.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories.CharacterData
 {
@@ -34,6 +35,16 @@ namespace Infrastructure.Repositories.CharacterData
                     (friendship.CharacterAId==characterA&&friendship.CharacterBId==characterB)||
                     (friendship.CharacterAId == characterB && friendship.CharacterBId == characterA));
             return dbFriendship == null;
+        }
+
+        public async Task DeleteAsync(Guid characterA, Guid characterB)
+        {
+            var dbFriendship = await _dbContext.Friendships
+                .FirstOrDefaultAsync(friendship =>
+                    (friendship.CharacterAId == characterA && friendship.CharacterBId == characterB) ||
+                    (friendship.CharacterAId == characterB && friendship.CharacterBId == characterA));
+            if (dbFriendship != null)
+                _dbContext.Friendships.Remove(dbFriendship);
         }
     }
 }

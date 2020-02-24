@@ -10,5 +10,6 @@ namespace Core.Domain.CharacterData.Repositories
         Task<Friendship> GetAsync(Guid id);
         Task AddAsync(Friendship friendship);
         bool Exists(Guid characterA,Guid characterB);
+        Task DeleteAsync(Guid characterA,Guid characterB);
     }
 }

@@ -9,10 +9,14 @@ namespace Services.CharacterData.Handlers.Command
 {
     public class DeleteFriendshipHandler:ICommandHandler<DeleteFriendship>
     {
-
-        public Task HandleAsync(DeleteFriendship command)
+        private readonly ICharacterDataService _characterDataService;
+        public DeleteFriendshipHandler(ICharacterDataService characterDataService)
         {
-            throw new NotImplementedException();
+            _characterDataService = characterDataService;
+        }
+        public async Task HandleAsync(DeleteFriendship command)
+        {
+            await _characterDataService.DeleteFriendship(command.CharacterA, command.CharacterB);
         }
     }
 }

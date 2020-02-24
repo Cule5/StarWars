@@ -20,7 +20,6 @@ namespace Services.CharacterData.Handlers.Query
         }
         public async Task<IEnumerable<ExtendedCharacterDto>> HandleAsync(AllCharactersInfo query)
         {
-
             return await _dbContext.Characters
                 .OrderBy(character => character.Name)
                 .Skip((query.PageNumber - 1) * query.PageSize)
