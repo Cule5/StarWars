@@ -53,17 +53,19 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        [Route("add-episode-to-character")]
-        public async Task<IActionResult> AddEpisodeToCharacter([FromBody]AddEpisodeToCharacter command)
+        [Route("add-episodes-to-character")]
+        public async Task<IActionResult> AddEpisodeToCharacter([FromBody]AddEpisodesToCharacter command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();
         }
         [HttpPost]
         [Route("create-friendship")]
-        public async Task<IActionResult> CreateFriendship()
+        public async Task<IActionResult> CreateFriendship([FromBody]CreateFriendship command)
         {
+            await _commandDispatcher.DispatchAsync(command);
             return Ok();
         }
+
     }
 }

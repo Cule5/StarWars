@@ -23,9 +23,13 @@ namespace Services.CharacterData.Handlers.Query
                 .FindAsync(query.Id);
             if (dbCharacter == null)
                 throw new Exception("");
-            return new ExtendedCharacterDto(dbCharacter.Id,dbCharacter.Name,dbCharacter.Characters
-                .Select(character=>new SimpleCharacterDto(character.Id,character.Name)),dbCharacter.Episodes
-                .Select(episode=>new SimpleEpisodeDto(episode.Id,episode.Title)));
+            return new ExtendedCharacterDto(dbCharacter.Id, dbCharacter.Name, dbCharacter.FriendshipsA
+                .Select(friendship => new SimpleCharacterDto(friendship.CharacterBId, friendship.CharacterB.Name))
+                .Concat(dbCharacter.FriendshipsB
+                        .Select(friendship =>
+                            new SimpleCharacterDto(friendship.CharacterAId, friendship.CharacterA.Name))),
+                    dbCharacter.CharactersEpisodes
+                        .Select(characterEpisode=>new SimpleEpisodeDto(characterEpisode.EpisodeId,characterEpisode.Episode.Title)));
         }
     }
 }

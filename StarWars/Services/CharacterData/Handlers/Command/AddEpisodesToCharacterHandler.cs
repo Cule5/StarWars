@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Services.CharacterData.Command;
 using Services.Common.Command;
 
 namespace Services.CharacterData.Handlers.Command
 {
-    public class CreateFriendshipHandler:ICommandHandler<CreateFriendship>
+    public class AddEpisodesToCharacterHandler:ICommandHandler<AddEpisodesToCharacter>
     {
         private readonly ICharacterDataService _characterDataService;
-        public CreateFriendshipHandler(ICharacterDataService characterDataService)
+        public AddEpisodesToCharacterHandler(ICharacterDataService characterDataService)
         {
             _characterDataService = characterDataService;
         }
-        public async Task HandleAsync(CreateFriendship command)
+        public async Task HandleAsync(AddEpisodesToCharacter command)
         {
-            await _characterDataService.CreateFriendshipAsync(command.CharacterId,command.Friends);
+            await _characterDataService.AddEpisodesToCharacter(command.CharacterId, command.Episodes);
         }
     }
 }

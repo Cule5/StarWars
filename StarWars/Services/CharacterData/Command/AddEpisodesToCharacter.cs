@@ -7,15 +7,16 @@ using Services.Common.Command;
 
 namespace Services.CharacterData.Command
 {
-    public class AddEpisodeToCharacter : ICommand
+    public class AddEpisodesToCharacter : ICommand
     {
         [JsonConstructor]
-        public AddEpisodeToCharacter(Guid episodeId,Guid characterId)
+        public AddEpisodesToCharacter(Guid characterId, IEnumerable<Guid> episodes)
         {
-            EpisodeId = episodeId;
             CharacterId = characterId;
+            Episodes = episodes;
         }
-        public Guid EpisodeId { get; private set; }
         public Guid CharacterId { get; private set; }
+        public IEnumerable<Guid> Episodes { get; private set; }
+        
     }
 }

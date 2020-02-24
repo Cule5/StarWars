@@ -10,6 +10,5 @@ namespace Core.Domain.CharacterData.Repositories
         Task<Character> GetAsync(Guid id);
         Task<Character> GetByNameAsync(string name);
         Task AddAsync(Character character);
-        
     }
 }

@@ -20,15 +20,17 @@ namespace Services.CharacterData.Handlers.Query
         }
         public async Task<IEnumerable<ExtendedCharacterDto>> HandleAsync(AllCharactersInfo query)
         {
+
             return await _dbContext.Characters
                 .OrderBy(character => character.Name)
-                .Skip((query.PageNumber - 1)*query.PageSize)
+                .Skip((query.PageNumber - 1) * query.PageSize)
                 .Take(query.PageSize)
-                .Select(character=>new ExtendedCharacterDto(character.Id,character.Name,
-                    character.Characters
-                    .Select(friend=>new SimpleCharacterDto(friend.Id,friend.Name)),
-                    character.Episodes
-                    .Select(episode=>new SimpleEpisodeDto(episode.Id,episode.Title))))
+                .Select(character=>new ExtendedCharacterDto(character.Id,character.Name,character.FriendshipsA
+                    .Select(friendship=>new SimpleCharacterDto(friendship.CharacterBId,friendship.CharacterB.Name))
+                    .Concat(character.FriendshipsB
+                        .Select(friendship=>new SimpleCharacterDto(friendship.CharacterAId, friendship.CharacterA.Name))),
+                    character.CharactersEpisodes
+                        .Select(characterEpisode=>new SimpleEpisodeDto(characterEpisode.EpisodeId,characterEpisode.Episode.Title))))
                 .ToListAsync();
         }
     }

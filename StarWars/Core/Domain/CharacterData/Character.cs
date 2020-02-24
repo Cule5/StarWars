@@ -17,7 +17,8 @@ namespace Core.Domain.CharacterData
             Name = name;
         }
         public string Name { get; protected set; }
-        public virtual ICollection<Character> Characters { get; protected set; } = new List<Character>();
-        public virtual ICollection<Episode> Episodes { get; protected set; } = new List<Episode>();
+        public virtual ICollection<CharacterEpisode> CharactersEpisodes { get; protected set; } = new List<CharacterEpisode>();
+        public virtual ICollection<Friendship> FriendshipsA { get; protected set; }=new List<Friendship>();
+        public virtual ICollection<Friendship> FriendshipsB { get; protected set; }=new List<Friendship>();
     }
 }

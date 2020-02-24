@@ -10,5 +10,8 @@ namespace Services.CharacterData
     {
         Task CreateCharacterAsync(Guid id,string name);
         Task CreateEpisodeAsync(Guid id,string title);
+        Task CreateFriendshipAsync(Guid characterId, IEnumerable<Guid> friends);
+        Task AddEpisodesToCharacter(Guid characterId,IEnumerable<Guid>episodes);
+        Task DeleteFriendship(Guid characterA,Guid characterB);
     }
 }
