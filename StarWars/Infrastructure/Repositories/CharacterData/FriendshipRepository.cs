@@ -34,7 +34,7 @@ namespace Infrastructure.Repositories.CharacterData
                 .FirstOrDefault(friendship=>
                     (friendship.CharacterAId==characterA&&friendship.CharacterBId==characterB)||
                     (friendship.CharacterAId == characterB && friendship.CharacterBId == characterA));
-            return dbFriendship == null;
+            return dbFriendship != null;
         }
 
         public async Task DeleteAsync(Guid characterA, Guid characterB)

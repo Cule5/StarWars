@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
@@ -10,6 +11,7 @@ using Services.CharacterData.Query;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class CharacterDataController : Controller
     {
@@ -30,10 +32,10 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Route("all-character-info")]
-        public async Task<IActionResult> Test([FromQuery]AllCharactersInfo query)
+        [Route("all-characters-info")]
+        public async Task<IActionResult> AllCharactersInfo(int pageNumber,int pageSize)
         {
-            return Ok(await _queryDispatcher.DispatchAsync(query));
+            return Ok(await _queryDispatcher.DispatchAsync(new AllCharactersInfo(pageNumber,pageSize)));
         }
 
         [HttpPost]

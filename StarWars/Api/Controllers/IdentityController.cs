@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
@@ -11,11 +12,11 @@ using Services.Identity.Query;
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    public class IdentityController:Controller
+    public class IdentityController : Controller
     {
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IQueryDispatcher _queryDispatcher;
-        public IdentityController(ICommandDispatcher commandDispatcher,IQueryDispatcher queryDispatcher)
+        public IdentityController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
         {
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
@@ -34,6 +35,5 @@ namespace Api.Controllers
             await _commandDispatcher.DispatchAsync(command);
             return Ok();
         }
-
     }
 }
