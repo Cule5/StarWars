@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Domain.Identity.Services;
 using Infrastructure.Authentication;
 using Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
@@ -14,18 +15,21 @@ namespace Services.Identity.Handlers.Query
     {
         private readonly AppDbContext _dbContext;
         private readonly IJwtProvider _jwtProvider;
-        public SignInHandler(AppDbContext dbContext,IJwtProvider jwtProvider)
+        private readonly IHasher _hasher;
+        public SignInHandler(AppDbContext dbContext,IJwtProvider jwtProvider,IHasher hasher)
         {
             _dbContext = dbContext;
             _jwtProvider = jwtProvider;
+            _hasher = hasher;
         }
 
         public async Task<JsonWebToken> HandleAsync(SignIn query)
         {
-            var dbUser=await _dbContext.Users
-                .FirstOrDefaultAsync(user=>user.Email.Equals(query.Email)&&user.Password.Equals(query.Password));
-            if(dbUser==null)
-                throw new Exception("Invalid email or password");
+            var dbUser = await _dbContext.Users
+                .FirstOrDefaultAsync(user=>user.Email.Equals(query.Email));
+            if (dbUser == null || !_hasher.IsValidAsync(dbUser, query.Password))
+                throw new ServiceException("Invalid email or password");
+            
             return _jwtProvider.CreateToken(dbUser.Id);
 
         }

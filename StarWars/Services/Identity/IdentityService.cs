@@ -18,9 +18,9 @@ namespace Services.Identity
             _userFactory = userFactory;
         }
 
-        public async Task SignUpAsync(string email, string password)
+        public async Task SignUpAsync(Guid userId,string email, string password)
         {
-            var newUser=await _userFactory.CreateAsync(email, password);
+            var newUser=await _userFactory.CreateAsync(userId,email, password);
             await _userRepository.AddAsync(newUser);
         }
     }

@@ -16,7 +16,7 @@ namespace Services.Identity.Handlers.Command
         }
         public async Task HandleAsync(SignUp command)
         {
-            await _identityService.SignUpAsync(command.Email,command.Password);
+            await _identityService.SignUpAsync(command.UserId,command.Email,command.Password);
         }
     }
 }

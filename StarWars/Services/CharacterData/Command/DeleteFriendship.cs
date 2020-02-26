@@ -6,10 +6,10 @@ using Services.Common.Command;
 
 namespace Services.CharacterData.Command
 {
-    public class DeleteFriendship:ICommand
+    public class DeleteFriendship : ICommand
     {
         [JsonConstructor]
-        public DeleteFriendship(Guid characterA,Guid characterB)
+        public DeleteFriendship(Guid characterA, Guid characterB)
         {
             CharacterA = characterA;
             CharacterB = characterB;

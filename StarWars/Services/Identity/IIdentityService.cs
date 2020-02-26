@@ -7,6 +7,6 @@ namespace Services.Identity
 {
     public interface IIdentityService
     {
-        Task SignUpAsync(string email,string password);
+        Task SignUpAsync(Guid userId,string email,string password);
     }
 }
