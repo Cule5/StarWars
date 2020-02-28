@@ -20,11 +20,6 @@ namespace Services.CharacterData.Handlers.Query
         }
         public async Task<IEnumerable<ExtendedCharacterDto>> HandleAsync(AllCharactersInfo query)
         {
-            //var result=_dbContext.Characters.Select(character=>new{Friends= character.FriendshipsA
-            //    .Select(friendship => new SimpleCharacterDto(friendship.CharacterBId, friendship.CharacterB.Name))
-            //    .Concat(character.FriendshipsB
-            //        .Select(friendship => new SimpleCharacterDto(friendship.CharacterAId, friendship.CharacterA.Name)))});
-
             return await _dbContext.Characters
                 .OrderBy(character => character.Name)
                 .Skip((query.PageNumber - 1) * query.PageSize)

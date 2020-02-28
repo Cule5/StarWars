@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Domain;
 using Core.Domain.CharacterData;
 using Core.Domain.CharacterData.Factories;
 using Core.Domain.CharacterData.Repositories;
@@ -71,8 +73,18 @@ namespace Services.CharacterData
             foreach (var episodeId in episodes)
             {
                 var dbEpisode=await _episodeRepository.GetAsync(episodeId);
-                if (dbEpisode != null)
+                if (dbEpisode == null) continue;
+                try
+                {
                     dbEpisode.AddCharacter(dbCharacter);
+                }
+                catch (DomainException)
+                {
+
+                }
+
+
+
             }
 
             await _dbContext.SaveChangesAsync();

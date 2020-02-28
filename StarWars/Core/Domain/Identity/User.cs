@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Core.Domain.Identity
 {
-    public class User:Entity
+    public class User:AggregateRoot
     {
         private string _emailRegex = @"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
         public string Email { get; protected set; }

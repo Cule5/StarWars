@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Domain.CharacterData
 {
-    public class Episode:Entity
+    public class Episode:AggregateRoot
     {
         protected Episode()
         {
@@ -23,7 +23,8 @@ namespace Core.Domain.CharacterData
             var newCharacterEpisode = new CharacterEpisode(character.Id,Id);
             var result=CharacterEpisodes
                 .FirstOrDefault(characterEpisode=>characterEpisode.CharacterId==character.Id&&characterEpisode.EpisodeId==Id);
-            if (result != null) return;
+            if (result != null)
+                throw new DomainException("character already is in given episode");
             CharacterEpisodes.Add(newCharacterEpisode);
             character.CharactersEpisodes.Add(newCharacterEpisode);
         }
